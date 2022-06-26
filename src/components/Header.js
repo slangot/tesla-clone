@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function Header() {
+
+  const [burgerNavDisplay, setBurgerNavDisplay] = useState(false)
+
   return (
     <Container>
       <a href="#">
-        <img src="../assets/images/logo.svg" alt="" />
+        <img src="../assets/images/logo.svg" alt="Tesla logo" />
       </a>
       <LeftMenu>
           <a href="#">
@@ -26,11 +29,11 @@ export default function Header() {
       <RightMenu>
         <a href="#">Shop</a>
         <a href="#">Tesla Account</a>
-        <SideMenu />
+        <SideMenu onClick={() => setBurgerNavDisplay(true) }/>
       </RightMenu>
-      <BurgerNav>
+      <BurgerNav show={burgerNavDisplay}>
         <CloseContainer>
-          <CustomClose />
+          <CustomClose onClick={() => setBurgerNavDisplay(false)}/>
         </CloseContainer>
         <li><a href="#">Model S</a></li>
         <li><a href="#">Model 3</a></li>
@@ -105,6 +108,8 @@ const BurgerNav = styled.div`
   z-index: 100;
   list-style: none;
   padding: 20px;
+  transform: ${props => props.show ? 'translateX(0)' : 'translateX(100%)'}; //Check the props to show/hide
+  transition: 0.2s;
 
   li {
     padding: 15px 0;
