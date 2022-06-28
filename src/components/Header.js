@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <Container>
-      <BlurEffect show={burgerNavDisplay}/>
+      <BlurEffect show={burgerNavDisplay} onClick={() => setBurgerNavDisplay(false)}/>
       <a href="#">
         <img src="../assets/images/logo.svg" alt="Tesla logo" />
       </a>
