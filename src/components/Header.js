@@ -12,6 +12,7 @@ export default function Header() {
 
   return (
     <Container>
+      <BlurEffect show={burgerNavDisplay}/>
       <a href="#">
         <img src="../assets/images/logo.svg" alt="Tesla logo" />
       </a>
@@ -20,20 +21,26 @@ export default function Header() {
       </LeftMenu>
       <RightMenu>
         <a href="#">Shop</a>
-        <a href="#">Tesla Account</a>
+        <a href="#">Account</a>
         <SideMenu onClick={() => setBurgerNavDisplay(true) }/>
       </RightMenu>
       <BurgerNav show={burgerNavDisplay}>
         <CloseContainer>
           <CustomClose onClick={() => setBurgerNavDisplay(false)}/>
         </CloseContainer>
-        {cars && cars.map((car, index) => <li key={index}><a href="#">{car}</a></li>)}
         <li><a href="#">Existing Inventory</a></li>
         <li><a href="#">Used Inventory</a></li>
         <li><a href="#">Trade-in</a></li>
+        <li><a href="#">Test Drive</a></li>
+        <li><a href="#">Insurance</a></li>
         <li><a href="#">Cybertruck</a></li>
         <li><a href="#">Roadster</a></li>
         <li><a href="#">Power Wall</a></li>
+        <li><a href="#">Commercial Energy</a></li>
+        <li><a href="#">Utilities</a></li>
+        <li><a href="#">Find Us</a></li>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">Investor Relations</a></li>
       </BurgerNav>
     </Container>
   )
@@ -50,6 +57,21 @@ const Container = styled.div`
   left: 0;
   right: 0;
   z-index: 1;
+  img {
+    height: 20px;
+  }
+`
+
+const BlurEffect = styled.div`
+  display: ${props => props.show ? 'block' : 'none'}; //Check the props to show/hide
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background-color: rgba(0,0,0,0.1);
+  backdrop-filter: blur(3px);
 `
 
 const LeftMenu = styled.div`
@@ -60,9 +82,17 @@ const LeftMenu = styled.div`
 
   a {
     font-weight: 600;
-    text-transform: uppercase;
-    padding: 0 10px;
+    padding: 8px 15px;
     flex-wrap: no-wrap;
+    font-size: 0.8rem;
+    background-color: transparent;
+    transition: 0.3s linear;
+    border-radius: 30px;
+
+  }
+
+  a:hover {
+    background-color: rgba(100, 100, 100, 0.1);
   }
 
   @media(max-width: 768px) {
@@ -75,8 +105,8 @@ const RightMenu = styled.div`
   align-items: center;
   a {
     font-weight: 600;
-    text-transform: uppercase;
     margin-right: 10px;
+    font-size: 0.8rem;
   }
 `
 
@@ -89,6 +119,9 @@ const BurgerNav = styled.div`
   flex-direction: column;
   text-align: start;
   position: fixed;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
   top: 0;
   bottom: 0;
   right: 0;
@@ -108,7 +141,13 @@ const BurgerNav = styled.div`
       font-weight: 600;
     }
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
+
+
 
 const CloseContainer = styled.div`
   display: flex;
